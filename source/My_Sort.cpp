@@ -5,7 +5,7 @@
 // For example : a = [4,3,9,3,7], 
 // the rank of all the elements in a is [2,0,4,1,3];
 template<class T>
-void rank(T a[], int size, int r[]) {
+void rank(const T a[], int size, int r[]) {
 	// initialize r[]
 	for (int i = 0; i < size; i++) {
 		r[i] = 0;
@@ -20,6 +20,18 @@ void rank(T a[], int size, int r[]) {
 			}
 		}
 	}
+}
+template<class T>
+void in_placeRearrange(T a[], int size, int r[]) {
+	rank(a, size, r);
+	for (int i = 0; i < size; i++) {
+		while (r[i] != i) {
+			int t = r[i];
+			std::swap(a[i], a[t]);
+			std::swap(r[i], r[t]);
+		}
+	}
+
 }
 
 template<class T>
