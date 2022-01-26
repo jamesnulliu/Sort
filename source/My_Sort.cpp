@@ -77,6 +77,9 @@ void insertionSort(T a[], int size) {
 	for (int i = 1; i < size; i++) {
 		T t = a[i];
 		int j;
+		// Insert a[i] into a[0:i-1].
+		// Keep moving a[j] to a[j+1] until t >= a[j],
+		// and then assign t (the value of origin a[i]) to a[j+1].
 		for (j = i - 1; j >= 0 && t < a[j]; j--) {
 			a[j + 1] = a[j];
 		}
