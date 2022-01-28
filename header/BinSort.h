@@ -22,11 +22,5 @@ std::ostream& operator<<(std::ostream out, const studentRecord& x) {
 	out << x.score << ' ' << *x.name << std::endl;
 	return out;
 }
-class BinSort
-{
-private:
-	studentRecord stu;
-public:
-	void binSort(chain)
-};
+
 
