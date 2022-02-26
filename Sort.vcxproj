@@ -142,13 +142,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="source\Chain.cpp" />
-    <ClCompile Include="header\BinSort.cpp" />
     <ClCompile Include="source\mian.cpp" />
     <ClCompile Include="source\My_Sort.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="header\Chain.h" />
-    <ClInclude Include="header\BinSort.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -58,7 +58,7 @@ void selectionSort(T a[], int n) {
 template<class T>
 void bubbleSort(T a[], int size) {
 	bool swapped = true; // True as initialization.
-	for (int i = 0; swapped && (i > size - 1); i++) {
+	for (int i = 0; swapped && (i < size - 1); i++) {
 		// Till now the there has been no swapped element.
 		swapped = false;
 		// Move the largest element in a[i:size-1] to the end of the array.
