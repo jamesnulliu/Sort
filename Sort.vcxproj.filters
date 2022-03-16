@@ -24,6 +24,9 @@
     <ClCompile Include="source\Chain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="source\My_func.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="header\Chain.h">

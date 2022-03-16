@@ -1,4 +1,5 @@
 #pragma once
+#include <cmath>
 
 template <typename T>
 struct ChainNode {
@@ -46,10 +47,10 @@ public:
 	ChainNode<T>* get_node(int);
 	// Bin Sort.
 	void binSort(int);
+	// Radix Sort;
+	void radixSort(int, int);
 
 };
-
-
 
 template<class T>
 int Chain<T>::size() const {
@@ -181,3 +182,70 @@ void Chain<T>::binSort(int range) {
 	delete[] top;
 }
 
+// d is the number of elements.
+template<class T> 
+void Chain<T>::radixSort(int radix, int range) {
+	// When use "radix" to decompose the numbers from 0 to "range",
+	// the max decompose round is "ceil(log(range + 1) / log(radix))";
+	// "ceil()" returns the smallest integral value 
+	// that is not less than x (as a floating-point value).
+	int maxDecomposeRound = ceil(log(range + 1) / log(radix));
+
+	// Allocate the firstNode to "pNode".
+	ChainNode<T>* pNode = get_firstNode();
+
+	// Create and initialize the bins.
+	ChainNode<T>** bottom, ** top;
+	bottom = new ChainNode<T>*[radix + 1];
+	top = new ChainNode<T>*[radix + 1];
+	for (auto pp : bottom) {
+		pp = nullptr;
+	}
+
+	for (int i = 0; i < maxDecomposeRound; i++) {
+		// Allocate the nodes to the bins,
+		// In each bin, it should be empty or a chain in which nodes have same elements.
+		while (pNode != nullptr) {
+			// Convert the type of "element" to "int".
+			int theBin = (pNode->element % (int)pow(radix, i + 1)) / (int)pow(radix, i);
+			// The bin is empty:
+			if (bottom[theBin] == nullptr) {
+				top[theBin] = pNode;
+				bottom[theBin] = top[theBin];
+			}
+			// The bin is not empty:
+			else {
+				// Allocate "pNode" to the pointer above "top[theBin]";
+				top[theBin]->next = pNode;
+				// Make the pointer above "top[theBin]";
+				top[theBin] = pNode;
+			}
+			pNode = pNode->next;
+		}
+
+		// Collect the nodes from the bins and assemble them to an ordered chain.
+		ChainNode<T>* temp = nullptr;
+		for (int theBin = 0; theBin <= range; theBin++) {
+			if (bottom[theBin] != nullptr) {
+				// The first non-empty bin.
+				if (temp == nullptr) {
+					headnode->next = bottom[theBin];
+				}
+				// Not the first non-empty bin.
+				else {
+					temp->next = bottom[theBin];
+				}
+				temp = top[theBin];
+			}
+		}
+		if (temp != nullptr) {
+			temp->next = nullptr;
+		}
+
+		// "bottom" and "top" are pointers to pointers;
+		// Release their memory will not delete the element in the Chain.
+		delete[] bottom;
+		delete[] top;
+	}
+
+}
