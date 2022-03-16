@@ -139,7 +139,7 @@ void Chain<T>::binSort(int range) {
 	}
 
 	// Allocate the nodes to the bins,
-	// in each bin, it should be empty or a chain in which nodes have same elements.
+	// In each bin, it should be empty or a chain in which nodes have same elements.
 	for (; pNode != nullptr; pNode = pNode->next) {
 		// Convert the type of "element" to "int".
 		int theBin = pNode->element;
@@ -150,12 +150,14 @@ void Chain<T>::binSort(int range) {
 		}
 		// The bin is not empty:
 		else {
+			// Allocate "pNode" to the pointer above "top[theBin]";
 			top[theBin]->next = pNode;
+			// Make the pointer above "top[theBin]";
 			top[theBin] = pNode;
 		}
 	}
 
-	// Collect the nodes in the bins and assemble them to an ordered chain.
+	// Collect the nodes from the bins and assemble them to an ordered chain.
 	ChainNode<T>* temp = nullptr;
 	for (int theBin = 0; theBin <= range; theBin++) {
 		if (bottom[theBin] != nullptr) {
@@ -174,6 +176,7 @@ void Chain<T>::binSort(int range) {
 		temp->next = nullptr;
 	}
 
+	// "bottom" and "top" are pointers to pointers;
 	delete[] bottom;
 	delete[] top;
 }
