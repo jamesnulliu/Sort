@@ -7,5 +7,5 @@ int main() {
 	line.insert(5);
 	line.insert(2);
 	line.insert(0);
-	line.binSort(6);
+	line.binSort(5);
 }
